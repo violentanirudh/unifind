@@ -1,7 +1,7 @@
 <div>
 
     <div class="mb-4">
-        <a wire:navigate href="{{ url()->previous() }}" class="text-blue-500 flex items-center gap-2">
+        <a wire:navigate href="{{ route('dashboard') }}" class="text-blue-500 flex items-center gap-2">
             <i class="ph-bold ph-arrow-left"></i> Back
         </a>
     </div>
@@ -19,7 +19,8 @@
     <div class="mt-4">
         @php
             $statusColors = [
-                'reported' => 'bg-amber-100 text-amber-700',
+                'lost' => 'bg-red-100 text-red-700',
+                'found' => 'bg-amber-100 text-amber-700',
                 'deposited' => 'bg-blue-100 text-blue-700',
                 'claimed' => 'bg-green-100 text-green-700',
             ];

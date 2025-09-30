@@ -9,7 +9,7 @@
     }"
 >
 
-    <a wire:navigate href="{{ route('dashboard') }}" class="text-xl font-medium">UniFind</a>
+    <a wire:navigate href="{{ route('dashboard') }}" class="text-xl font-bold">UniFind</a>
 
     @if (auth()->check())
 
@@ -20,6 +20,10 @@
 
         <div class="bg-white absolute left-0 top-16 w-full hidden border-b border-zinc-200" x-ref="menu">
             <div class="p-6 flex flex-col space-y-4">
+                <a wire:navigate href="{{ route('home.guest') }}" class="flex items-center gap-2 hover:text-blue-600">
+                    <i class="ph-bold ph-house"></i>
+                    Home
+                </a>
                 <a wire:navigate href="{{ route('dashboard') }}" class="flex items-center gap-2 hover:text-blue-600">
                     <i class="ph-bold ph-tray"></i>
                     Feeds
@@ -31,6 +35,10 @@
                 <a wire:navigate href="" class="flex items-center gap-2 hover:text-blue-600">
                     <i class="ph-bold ph-user"></i>
                     Profile
+                </a>
+                <a href="{{ route('logout') }}" class="flex items-center gap-2 hover:text-blue-600">
+                    <i class="ph-bold ph-sign-out"></i>
+                    Sign Out
                 </a>
             </div>
         </div>

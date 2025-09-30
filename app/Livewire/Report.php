@@ -19,6 +19,14 @@ class Report extends Component
     #[Rule('nullable|image|max:1024')]
     public $image;
 
+    #[Rule('required|in:lost,found')]
+    public $type = null;
+
+    public function removeImage()
+    {
+        $this->image = null;
+    }
+
     public function submit()
     {
         $this->validate();
@@ -28,13 +36,13 @@ class Report extends Component
             'code'        => strtoupper(\Str::random(6)),
             'name'        => $this->name,
             'description' => $this->description,
+            'type'        => $this->type,
         ];
 
         if ($this->image) {
             $path = $this->image->store('images', 'public');
-            $report->image_path = asset('storage/' . $path);
+            $report['image_path'] = asset('storage/' . $path);
         }
-
 
         $report = \App\Models\Item::create($report);
 
@@ -44,7 +52,7 @@ class Report extends Component
         }
 
         session()->flash('toast', ['type' => 'success', 'message' => 'Report successfully submitted.']);
-        $this->reset(['name', 'description']);
+        $this->redirect(route('item', $report->code), navigate: true);
     }
 
     public function render()
