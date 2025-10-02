@@ -32,7 +32,7 @@
                     <i class="ph-bold ph-warning-circle"></i>
                     Report Missing Item
                 </a>
-                <a wire:navigate href="" class="flex items-center gap-2 hover:text-blue-600">
+                <a wire:navigate href="{{ route('profile') }}" class="flex items-center gap-2 hover:text-blue-600">
                     <i class="ph-bold ph-user"></i>
                     Profile
                 </a>

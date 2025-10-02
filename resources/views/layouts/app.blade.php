@@ -35,6 +35,10 @@
                 <x-flash />
                 @yield('content')
             </div>
+
+            <div class="p-10 text-center text-sm text-gray-500">
+                &copy; {{ date('Y') }} UniFind. All rights reserved.
+            </div>
         </div>
 
         @livewireScripts

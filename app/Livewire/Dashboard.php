@@ -4,12 +4,15 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Item;
+use Livewire\WithPagination;
+use Livewire\WithoutUrlPagination;
 use Illuminate\Support\Facades\Gate;
 
 class Dashboard extends Component
 {
+    use WithPagination, WithoutUrlPagination;
+
     public $user;
-    public $items;
     public $search;
 
     public function delete(Item $item)
@@ -28,30 +31,25 @@ class Dashboard extends Component
             $this->redirect('/signin', navigate: true);
             return;
         }
-
-        $this->items = \App\Models\Item::where('is_visible', false)
-            ->orderBy('created_at', 'desc')
-            ->take(10)
-            ->get();
     }
 
     public function updatedSearch()
     {
-        $this->items = \App\Models\Item::where('is_visible', false)
-            ->where(function ($query) {
-                $query->where('name', 'like', '%' . $this->search . '%')
-                    ->orWhere('description', 'like', '%' . $this->search . '%')
-                    ->orWhere('code', 'like', '%' . $this->search . '%');
-            })
-            ->orderBy('created_at', 'desc')
-            ->take(10)
-            ->get();
+        $this->resetPage();
     }
 
     public function render()
     {
-        return view('livewire.dashboard')
-            ->extends('layouts.app')
-            ->section('content');
+        return view('livewire.dashboard', [
+            'items' => Item::where('is_visible', false)
+                    ->when($this->search, function($query) {
+                        $query->where('name', 'like', '%' . $this->search . '%');
+                        $query->orWhere('code', 'like', '%' . strtoupper($this->search) . '%');
+                    })
+                    ->orderBy('created_at', 'desc')
+                    ->simplePaginate(10)
+        ])
+        ->extends('layouts.app')
+        ->section('content');
     }
 }

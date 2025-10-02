@@ -18,7 +18,7 @@ class ItemFactory extends Factory
     {
         return [
             'name' => fake()->sentence(),
-            'code' => strtoupper(fake()->bothify('??##??##')),
+            'code' => strtoupper(fake()->bothify('?##??#')),
             'description' => fake()->paragraph(2),
             'status' => fake()->randomElement(['lost', 'found', 'deposited', 'claimed']),
             'is_visible' => fake()->boolean(20),

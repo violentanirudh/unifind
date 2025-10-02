@@ -10,7 +10,7 @@
     <div class="divide-y divide-zinc-200 mt-6">
         @foreach ($items as $item)
             <div class="py-4" :key="{{ $item->id }}">
-                <h2 class="text-lg font-medium w-full truncate text-blue-600">
+                <h2 class="text-lg font-medium w-full truncate text-blue-500">
                     <a wire:navigate href="{{ route('item', $item->code) }}">{{ $item->name }}</a>
                 </h2>
                 <p class="mt-2 text-zinc-500 text-sm">{{ Str::limit($item->description, 100) }}</p>
@@ -20,16 +20,30 @@
                         {{ $item->code }}
                     </span>
                 </div>
-                <!-- Actions -->
-                @if (Gate::allows('delete-item', $item))
-                    <x-button wire:click="delete({{ $item }})" class="mt-4 !bg-red-800 hover:bg-red-700 gap-2 text-sm">
-                        <i class="ph-bold ph-trash text-white"></i>
-                        <span class="text-white">Delete</span>
-                    </x-button>
+                @if ($user->id === $item->reported_by)
+                    <span class="text-xs bg-green-100 px-2 py-1 rounded">
+                        Reported by you
+                    </span>
                 @endif
             </div>
         @endforeach
     </div>
 
+
+    <div class="flex justify-between items-center gap-4 mt-10 flex-row-reverse">
+         @if ($items->nextPageUrl())
+            <a href="{{ $items->nextPageUrl() }}" class="text-blue-500 flex items-center gap-2">
+                Next
+                <i class="ph-bold ph-arrow-right"></i>
+            </a>
+        @endif
+
+        @if ($items->previousPageURL())
+            <a href="{{ $items->previousPageUrl() }}" class="text-blue-500 flex items-center gap-2">
+                <i class="ph-bold ph-arrow-left"></i>
+                Previous
+            </a>
+        @endif
+    </div>
 
 </div>

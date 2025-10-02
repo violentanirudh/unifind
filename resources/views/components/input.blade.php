@@ -16,7 +16,7 @@
         name="{{ $name ?? '' }}"
         value="{{ $value ?? '' }}"
         placeholder="{{ $placeholder ?? '' }}"
-        class="border rounded px-3 py-2 w-full border-zinc-300 {{ $class ?? '' }}"
+        class="border rounded px-3 py-2 w-full border-zinc-300 text-sm {{ $class ?? '' }}"
         {{ $attributes }}
     >
     @error($name)

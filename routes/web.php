@@ -12,6 +12,7 @@ Route::redirect('/login', '/signin')->name('login');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', \App\Livewire\Dashboard::class)->middleware('role:user,moderator,admin')->name('dashboard');
     Route::get('/report', \App\Livewire\Report::class)->middleware('role:user,moderator,admin')->name('report');
+    Route::get('/profile', \App\Livewire\Profile::class)->name('profile');
     Route::get('/items/{item}', \App\Livewire\Item::class)->name('item');
 
     Route::get('/logout', function () {
