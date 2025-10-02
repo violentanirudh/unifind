@@ -29,7 +29,6 @@
         @endforeach
     </div>
 
-
     <div class="flex justify-between items-center gap-4 mt-10 flex-row-reverse">
          @if ($items->nextPageUrl())
             <a href="{{ $items->nextPageUrl() }}" class="text-blue-500 flex items-center gap-2">
@@ -37,7 +36,7 @@
                 <i class="ph-bold ph-arrow-right"></i>
             </a>
         @endif
-
+        <span></span>
         @if ($items->previousPageURL())
             <a href="{{ $items->previousPageUrl() }}" class="text-blue-500 flex items-center gap-2">
                 <i class="ph-bold ph-arrow-left"></i>
