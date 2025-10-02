@@ -47,7 +47,7 @@ class Dashboard extends Component
                         $query->orWhere('code', 'like', '%' . strtoupper($this->search) . '%');
                     })
                     ->orderBy('created_at', 'desc')
-                    ->simplePaginate(3)
+                    ->simplePaginate(10)
         ])
         ->extends('layouts.app')
         ->section('content');
