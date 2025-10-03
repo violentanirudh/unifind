@@ -13,6 +13,9 @@ class Report extends Component
     #[Rule('required|string|max:255')]
     public $name = '';
 
+    #[Rule('required|string|max:255')]
+    public $location = '';
+
     #[Rule('required|string|max:2000')]
     public $description = '';
 
@@ -21,6 +24,8 @@ class Report extends Component
 
     #[Rule('required|in:lost,found')]
     public $type = null;
+
+    public $items = [];
 
     public function removeImage()
     {
@@ -35,6 +40,7 @@ class Report extends Component
             'reported_by' => auth()->id(),
             'code'        => strtoupper(\Str::random(6)),
             'name'        => $this->name,
+            'location'    => $this->location,
             'description' => $this->description,
             'type'        => $this->type,
         ];
@@ -53,6 +59,20 @@ class Report extends Component
 
         session()->flash('toast', ['type' => 'success', 'message' => 'Report successfully submitted.']);
         $this->redirect(route('item', $report->code), navigate: true);
+    }
+
+    public function updatedName()
+    {
+        if (strlen($this->name) < 3) {
+            $this->items = [];
+            return;
+        }
+
+        $this->items = \App\Models\Item::select('name', 'code')
+            ->where('name', 'like', '%' . $this->name . '%')
+            ->whereIn('status', ['lost', 'found'])
+            ->orderBy('created_at', 'desc')->limit(5)
+            ->get();
     }
 
     public function render()

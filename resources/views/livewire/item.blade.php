@@ -1,7 +1,9 @@
 <div>
 
     <div class="mb-4">
-        <a wire:navigate href="{{ route('dashboard') }}" class="text-blue-500 flex items-center gap-2">
+        <a wire:navigate
+        href="{{ url()->previous() !== url()->current() ? url()->previous() : route('dashboard') }}"
+        class="text-blue-500 flex items-center gap-2">
             <i class="ph-bold ph-arrow-left"></i> Back
         </a>
     </div>

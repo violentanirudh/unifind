@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('code');
             $table->string('image_path')->nullable();
+            $table->string('location');
             $table->text('description')->nullable();
             $table->enum('status', ['lost', 'found', 'deposited', 'claimed'])->default('lost');
             $table->boolean('is_visible')->default(false);

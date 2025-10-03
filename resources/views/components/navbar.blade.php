@@ -1,5 +1,5 @@
 <div
-    class="w-full border-b border-zinc-200 px-6 mb-6 flex justify-between items-center relative h-16 sticky top-0 bg-white z-10"
+    class="w-full border-b border-zinc-200 px-6 flex justify-between items-center relative h-16 sticky top-0 bg-white z-10"
     x-data="{
         open: false,
         handleMenu() {
