@@ -19,6 +19,13 @@ class Feeds extends Component
         $this->resetPage();
     }
 
+    public function approve(Item $item) {
+        if (Gate::authorize('update-item', $item));
+        // dd($item);
+        $item->update(['is_visible' => true]);
+        $this->resetPage();
+    }
+
     public function render()
     {
         return view('livewire.management.feeds', [

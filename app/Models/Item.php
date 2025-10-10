@@ -13,6 +13,7 @@ class Item extends Model
         'name',
         'description',
         'code',
+        'location',
         'status',
         'image_path',
         'deposited_at',

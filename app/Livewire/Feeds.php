@@ -20,7 +20,7 @@ class Feeds extends Component
         Gate::authorize('delete-item', $item);
         $item->delete();
         session()->flash('toast', ['type' => 'success', 'message' => 'Item deleted successfully.']);
-        $this->mount();
+        $this->resetPage();
     }
 
     public function mount()

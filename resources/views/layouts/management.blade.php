@@ -17,8 +17,17 @@
             href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css"
         />
 
+        <!-- Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap" rel="stylesheet">
+
         <!-- Styles -->
         <style>
+
+            * {
+                font-family: 'Parkinsans', sans-serif;
+            }
             ::-webkit-scrollbar {
                 display: none;
             }
@@ -28,7 +37,7 @@
     </head>
     <body class="bg-zinc-200 min-h-screen flex flex-col items-center justify-between overflow-hidden">
 
-        <div class="bg-white w-full mx-auto min-h-screen max-h-screen overflow-hidden flex">
+        <div class="bg-white w-full mx-auto min-h-screen max-h-screen overflow-hidden flex"  x-data="{ showSidebar: false }">
 
             <x-sidebar />
 
@@ -43,8 +52,10 @@
 
                 <div class="p-6">
                 <x-flash />
-                @yield('content')
+                    @yield('content')
                 </div>
+
+                <x-form-sidebar />
             </div>
         </div>
 

@@ -29,7 +29,12 @@
             <tbody>
                 @forelse ($items as $item)
                     <tr class="bg-white border-b border-zinc-200 hover:bg-zinc-50" wire:key="{{ $item->id }}">
-                        <th scope="row" class="px-6 py-4 font-medium text-zinc-900 whitespace-nowrap">
+                        <th scope="row" class="px-6 py-4 font-medium text-zinc-900 whitespace-nowrap flex gap-4 items-center">
+
+                            {{-- Green dot to display is_visible state --}}
+                            <div class="h-2 w-2 rounded-full {{ $item->is_visible ? 'bg-green-400' : 'bg-zinc-200' }}">
+                            </div>
+
                             {{ $item->name }}
                         </th>
                         <td class="w-24 text-center">
@@ -44,12 +49,12 @@
                         <td class="px-6 py-4 text-right">
                             <div class="flex justify-end items-center space-x-3">
                                 {{-- Approve Button --}}
-                                <button wire:click="approve({{ $item->id }})" title="Approve" class="text-green-600 hover:text-green-800">
+                                <button wire:click="approve({{ $item->id }})" title="Approve" class="text-green-600 hover:text-green-800 cursor-pointer">
                                     <i class="ph-bold ph-check-circle text-xl"></i>
                                 </button>
 
                                 {{-- Edit Button --}}
-                                <button wire:click="edit({{ $item->id }})" title="Edit" class="text-blue-600 hover:text-blue-800">
+                                <button @click="showSidebar = true" title="Edit" class="text-blue-600 hover:text-blue-800 cursor-pointer">
                                     <i class="ph-bold ph-pencil-simple text-xl"></i>
                                 </button>
 
@@ -84,14 +89,14 @@
 
         <div class="flex gap-6 flex-row-reverse">
          @if ($items->nextPageUrl())
-            <a href="{{ $items->nextPageUrl() }}" class="text-blue-500 flex items-center gap-2">
+            <a wire:navigate href="{{ $items->nextPageUrl() }}" class="text-blue-500 flex items-center gap-2">
                 Next
                 <i class="ph-bold ph-arrow-right"></i>
             </a>
         @endif
         <span></span>
         @if ($items->previousPageURL())
-            <a href="{{ $items->previousPageUrl() }}" class="text-blue-500 flex items-center gap-2">
+            <a wire:navigate href="{{ $items->previousPageUrl() }}" class="text-blue-500 flex items-center gap-2">
                 <i class="ph-bold ph-arrow-left"></i>
                 Previous
             </a>

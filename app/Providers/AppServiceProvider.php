@@ -21,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::define('delete-item', [\App\Policies\ItemPolicy::class, 'delete']);
+        Gate::define('update-item', [\App\Policies\ItemPolicy::class, 'update']);
+
         Gate::define('is-admin', function (\App\Models\User $user) {
             return $user->isAdmin();
         });

@@ -37,7 +37,7 @@ class ItemPolicy
      */
     public function update(User $user, Item $item): bool
     {
-        return false;
+        return $user->isAdmin() || $user->isModerator();
     }
 
     /**
