@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Livewire\Management;
+
+use Livewire\Component;
+use App\Models\User;
+use Livewire\WithPagination;
+use Livewire\WithoutUrlPagination;
+use Illuminate\Support\Facades\Gate;
+
+class Users extends Component
+{
+    use WithPagination, WithoutUrlPagination;
+
+    public $search;
+
+    public function updatedSearch() {
+        if (strlen(trim($this->search)) < 3) return;
+        $this->resetPage();
+    }
+
+    public function render()
+    {
+        return view('livewire.management.users', [
+            'users' => User::when($this->search, function($query) {
+                        $query->where('name', 'like', '%' . $this->search . '%');
+                        $query->orWhere('email', 'like', '%', $this->search . '%');
+                    })
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(20)
+        ])
+            ->extends('layouts.management')
+            ->section('content');
+    }
+}

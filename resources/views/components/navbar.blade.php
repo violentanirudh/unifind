@@ -9,7 +9,7 @@
     }"
 >
 
-    <a wire:navigate href="{{ route('dashboard') }}" class="text-xl font-bold">UniFind</a>
+    <a wire:navigate href="{{ route('feeds') }}" class="text-xl font-bold">UniFind</a>
 
     @if (auth()->check())
 
@@ -24,7 +24,7 @@
                     <i class="ph-bold ph-house"></i>
                     Home
                 </a>
-                <a wire:navigate href="{{ route('dashboard') }}" class="flex items-center gap-2 hover:text-blue-600">
+                <a wire:navigate href="{{ route('feeds') }}" class="flex items-center gap-2 hover:text-blue-600">
                     <i class="ph-bold ph-tray"></i>
                     Feeds
                 </a>

@@ -17,7 +17,7 @@ class Item extends Component
         } else {
             session()->flash('toast', ['type' => 'error', 'message' => 'You are not authorized to delete this item.']);
         }
-        $this->redirect('/dashboard', navigate: true);
+        $this->redirect('/feeds', navigate: true);
     }
 
     public function mount($item)

@@ -24,9 +24,9 @@ class Item extends Model
     ];
 
     // Relationships
-    public function submitter()
+    public function reporter()
     {
-        return $this->belongsTo(User::class, 'submitted_by');
+        return $this->belongsTo(User::class, 'reported_by');
     }
 
     public function depositor()

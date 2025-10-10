@@ -8,7 +8,7 @@ use Livewire\WithPagination;
 use Livewire\WithoutUrlPagination;
 use Illuminate\Support\Facades\Gate;
 
-class Dashboard extends Component
+class Feeds extends Component
 {
     use WithPagination, WithoutUrlPagination;
 
@@ -40,7 +40,7 @@ class Dashboard extends Component
 
     public function render()
     {
-        return view('livewire.dashboard', [
+        return view('livewire.feeds', [
             'items' => Item::where('is_visible', false)
                     ->when($this->search, function($query) {
                         $query->where('name', 'like', '%' . $this->search . '%');

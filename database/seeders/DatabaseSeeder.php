@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Item;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,6 +16,16 @@ class DatabaseSeeder extends Seeder
     {
         // Create some users
         User::factory(3)->create();
+
+        $creators = ['Anirudh', 'Dev', 'Maitri', 'Avani'];
+
+        foreach ($creators as $name) {
+            User::create([
+                'name' => $name,
+                'email' => strtolower($name) . '@unifind.com',
+                'password' => Hash::make('password'),
+            ]);
+        }
 
         $users = User::all();
 
@@ -87,12 +98,7 @@ class DatabaseSeeder extends Seeder
                 'description' => $item['description'],
                 'location'    => fake()->city(),
                 'code'        => strtoupper(fake()->bothify('?##??#')),
-                'status'      => fake()->randomElement([
-                    'lost','lost','lost','lost','lost',
-                    'found','found','found',
-                    'deposited','deposited',
-                    'claimed'
-                ]),
+                'status'      => fake()->randomElement(['lost', 'found']),
                 'is_visible'  => fake()->boolean(70),
                 'reported_by' => $randomUser->id,
                 'created_at'  => fake()->dateTimeBetween('-3 days', 'now'),

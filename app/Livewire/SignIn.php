@@ -26,7 +26,7 @@ class Signin extends Component
         }
 
         Auth::login(Auth::user(), true);
-        $this->redirect('/dashboard');
+        $this->redirect('/feeds', navigate: true);
     }
 
     public function render()
