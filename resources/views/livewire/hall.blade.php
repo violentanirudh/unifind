@@ -35,7 +35,7 @@
                         {{-- Rank Number and Medal Icon --}}
                         <div class="w-12 text-center">
                             @if ($loop->iteration <= 3)
-                                <i class="ph-fill ph-medal text-3xl
+                                <i class="ph-bold ph-medal text-3xl
                                     @if ($loop->iteration == 1) text-yellow-400 @endif
                                     @if ($loop->iteration == 2) text-slate-400 @endif
                                     @if ($loop->iteration == 3) text-orange-400 @endif
