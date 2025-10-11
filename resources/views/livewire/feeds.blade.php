@@ -22,7 +22,7 @@
 
                     @if ($item->image_path)
                         <div
-                            style="background-image: url('{{ asset('storage/' . $item->image_path) }}')"
+                            style="background-image: url('{{ $item->image_path }}')"
                             class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
                         ></div>
 

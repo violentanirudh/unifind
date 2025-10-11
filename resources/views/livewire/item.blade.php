@@ -4,7 +4,7 @@
     <div class="lg:w-1/3">
         <div class="w-full aspect-square mb-4 bg-zinc-100 rounded-lg overflow-hidden flex items-center justify-center">
             @if ($item->image_path)
-                <img src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}" class="w-full h-full object-cover">
+                <img src="{{ $item->image_path }}" alt="{{ $item->name }}" class="w-full h-full object-cover">
             @else
                 {{-- Fallback icon when no image is available --}}
                 <i class="ph-bold ph-package text-6xl text-zinc-400"></i>
