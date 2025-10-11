@@ -68,24 +68,38 @@
                         {{-- Action Buttons --}}
                         <td class="px-6 py-4">
                             <div class="flex justify-end items-center space-x-3">
-                                {{-- Toggle Active Status Button --}}
-                                <button wire:click="toggleStatus({{ $user->id }})" title="Toggle Active Status" class="text-gray-500 hover:text-gray-800">
-                                    <i class="ph-bold ph-power text-xl"></i>
-                                </button>
 
                                 {{-- Edit Button --}}
-                                <button wire:click="edit({{ $user->id }})" title="Edit User" class="text-blue-600 hover:text-blue-800">
-                                    <i class="ph-bold ph-pencil-simple text-xl"></i>
-                                </button>
+                                @if ($user->role === 'user')
+                                    <x-action-button
+                                        :item="$user"
+                                        icon="ph-bold ph-user-check"
+                                        popover="Promote to Moderator"
+                                        title="Promote to Moderator"
+                                        color="text-green-600"
+                                        hoverColor="hover:opacity-75"
+                                        wire:click="updateRole({{ $user->id }}, 'moderator')"
+                                    />
+                                @else
+                                    <x-action-button
+                                        :item="$user"
+                                        icon="ph-bold ph-user-check"
+                                        popover="Demote to User"
+                                        title="Demote to User"
+                                        color="text-red-600"
+                                        hoverColor="hover:opacity-75"
+                                        wire:click="updateRole({{ $user->id }}, 'user')"
+                                    />
+                                @endif
 
                                 {{-- Delete Button --}}
-                                <button
+                                {{-- <button
                                     wire:click="delete({{ $user->id }})"
                                     wire:confirm="Are you sure you want to delete this user?"
                                     title="Delete User"
                                     class="text-red-600 hover:text-red-800">
                                     <i class="ph-bold ph-trash text-xl"></i>
-                                </button>
+                                </button> --}}
                             </div>
                         </td>
                     </tr>

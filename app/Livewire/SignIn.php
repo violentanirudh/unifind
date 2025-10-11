@@ -26,7 +26,7 @@ class SignIn extends Component
         }
 
         Auth::login(Auth::user(), true);
-        $this->redirect('/feeds', navigate: true);
+        in_array(Auth::user()->role, ['admin', 'moderator']) ? $this->redirect('/management') : $this->redirect('/feeds');
     }
 
     public function render()

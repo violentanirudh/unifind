@@ -10,7 +10,7 @@ Route::get('/signup', \App\Livewire\SignUp::class)->name('sign-up')->middleware(
 Route::redirect('/login', '/signin')->name('login');
 
 Route::middleware(['auth', 'role:user,moderator,admin'])->group(function () {
-    Route::get('/dashboard', \App\Livewire\Dashboard::class)->name('dashboard');
+    Route::redirect('/dashboard', '/feeds')->name('dashboard');
     Route::get('/feeds', \App\Livewire\Feeds::class)->name('feeds');
     Route::get('/report', \App\Livewire\Report::class)->name('report');
     Route::get('/profile', \App\Livewire\Profile::class)->name('profile');

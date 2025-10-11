@@ -19,6 +19,20 @@ class Users extends Component
         $this->resetPage();
     }
 
+    public function updateRole(User $user, $role) {
+        if ($user->role === 'admin') {
+            session()->flash('toast', ['type' => 'error', 'message' => 'You cannot change admin role.']);
+            return;
+        }
+        if (!auth()->user()->isAdmin() && in_array($role, ['user', 'moderator'])) {
+            session()->flash('toast', ['type' => 'error', 'message' => 'Unauthorized action.']);
+            return;
+        }
+        $user->role = $role;
+        $user->save();
+        session()->flash('toast', ['type' => 'success', 'message' => 'User role updated successfully.']);
+    }
+
     public function render()
     {
         return view('livewire.management.users', [
