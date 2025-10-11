@@ -11,13 +11,13 @@
                         The official, secure, and centralized platform for the campus community to report and recover lost belongings.
                     </p>
                     <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                        <a href="#" class="w-full sm:w-auto bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out shadow-lg">
+                        <a href="{{ route('report') }}" class="w-full sm:w-auto bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out shadow-lg">
                             Report a Lost Item
                         </a>
-                        <a href="#" class="w-full sm:w-auto bg-white text-blue-600 font-bold py-3 px-8 rounded-lg hover:bg-blue-50 transition duration-300 ease-in-out shadow-lg">
+                        <a href="{{ route('report') }}" class="w-full sm:w-auto bg-white text-blue-600 font-bold py-3 px-8 rounded-lg hover:bg-blue-50 transition duration-300 ease-in-out shadow-lg">
                             I Found Something
                         </a>
-                        <a href="#" class="w-full sm:w-auto bg-white text-blue-600 font-bold py-3 px-8 rounded-lg hover:bg-blue-50 transition duration-300 ease-in-out shadow-lg">
+                        <a href="{{ route('hall-of-fame') }}" class="w-full sm:w-auto bg-white text-blue-600 font-bold py-3 px-8 rounded-lg hover:bg-blue-50 transition duration-300 ease-in-out shadow-lg">
                             Hall Of Fame
                         </a>
                     </div>
