@@ -6,6 +6,9 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Item;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,28 +17,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+        $creators = ['Anirudh', 'Dev', 'Maitri', 'Avani'];
+
+        foreach ($creators as $name) {
+            User::create([
+                'name' => $name,
+                'email' => strtolower($name) . '@unifind.com',
+                'password' => Hash::make('password'),
+            ]);
+        }
+        // Ensure the storage directory for images exists
+        Storage::disk('public')->makeDirectory('images');
+
         // Create some users
         User::factory(5)->create();
 
-        // $creators = ['Anirudh', 'Dev', 'Maitri', 'Avani'];
-
-        // foreach ($creators as $name) {
-        //     User::create([
-        //         'name' => $name,
-        //         'email' => strtolower($name) . '@unifind.com',
-        //         'password' => Hash::make('password'),
-        //     ]);
-        // }
-
         $users = User::all();
-
-        // foreach (range(1, rand(20, 50)) as $index) {
-        //     $randomUser = $users->random();
-
-        //     Item::factory()->create([
-        //         'reported_by' => $randomUser->id,
-        //     ]);
-        // }
 
         $items = [
             ['name' => 'Black Wallet', 'description' => 'Leather wallet with multiple card slots, possibly containing student ID.'],
@@ -58,49 +56,37 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Math Textbook', 'description' => 'Advanced Calculus textbook, 3rd edition.'],
             ['name' => 'Lab Coat', 'description' => 'White lab coat with pen stains on the pocket.'],
             ['name' => 'USB Cable', 'description' => 'Black Type-C charging cable, slightly frayed.'],
-            ['name' => 'Sports Shoes', 'description' => 'White Adidas sneakers with blue stripes.'],
-            ['name' => 'Jacket', 'description' => 'Black puffer jacket, size L.'],
-            ['name' => 'Laptop', 'description' => 'Silver MacBook Air with stickers on the back.'],
-            ['name' => 'Pen Drive', 'description' => '32GB Kingston USB drive with red cap.'],
-            ['name' => 'Earphones', 'description' => 'Wired earphones, black with mic.'],
-            ['name' => 'Cap', 'description' => 'Blue baseball cap with college logo.'],
-            ['name' => 'Tablet', 'description' => 'Samsung Galaxy Tab S6, black case.'],
-            ['name' => 'Textbook', 'description' => 'Physics Fundamentals, red cover, 2nd edition.'],
-            ['name' => 'Lunch Box', 'description' => 'Green plastic lunchbox with cartoon print.'],
-            ['name' => 'Umbrella', 'description' => 'Foldable black umbrella with metal handle.'],
-            ['name' => 'Sports Bottle', 'description' => 'Plastic bottle with motivational quotes printed.'],
-            ['name' => 'Bluetooth Speaker', 'description' => 'Small JBL speaker, blue color.'],
-            ['name' => 'Diary', 'description' => 'Brown leather diary with pen holder.'],
-            ['name' => 'Scarf', 'description' => 'Woolen scarf, red and black stripes.'],
-            ['name' => 'Gloves', 'description' => 'Pair of black winter gloves.'],
-            ['name' => 'Pencil Box', 'description' => 'Blue pencil case with zipper.'],
-            ['name' => 'Marker Pen Set', 'description' => 'Set of 4 whiteboard markers.'],
-            ['name' => 'Head Cap', 'description' => 'Grey beanie cap.'],
-            ['name' => 'Passport', 'description' => 'Passport in a brown leather cover.'],
-            ['name' => 'Driving License', 'description' => 'Plastic card license in a transparent cover.'],
-            ['name' => 'Debit Card', 'description' => 'HDFC bank debit card, blue color.'],
-            ['name' => 'Notebook', 'description' => 'Green spiral notebook with math notes.'],
-            ['name' => 'Keychain', 'description' => 'Car key with remote lock button.'],
-            ['name' => 'Watch', 'description' => 'Smartwatch, black strap, cracked screen.'],
-            ['name' => 'Flash Drive', 'description' => '64GB Sandisk flash drive.'],
-            ['name' => 'Folder', 'description' => 'Blue plastic folder with documents.'],
-            ['name' => 'Water Bottle', 'description' => 'Transparent bottle with yellow cap.'],
-            ['name' => 'Phone Case', 'description' => 'Red silicone iPhone case.'],
-            ['name' => 'Bag', 'description' => 'Small handbag, black with golden zip.'],
         ];
 
         foreach ($items as $item) {
             $randomUser = $users->random();
+            $imagePath = null; // Default to null
+
+            // --- Logic to download and store image ---
+            try {
+                $imageUrl = 'https://picsum.photos/seed/'. fake()->unique()->numberBetween(1, 1000) .'/400/400';
+                $imageContents = Http::get($imageUrl)->body();
+
+                if ($imageContents) {
+                    $imageName = 'images/' . Str::random(40) . '.jpg';
+                    Storage::disk('public')->put($imageName, $imageContents);
+                    $imagePath = $imageName;
+                }
+            } catch (\Exception $e) {
+                // If the image download fails, we'll just proceed without an image.
+                // You could log the error here if needed: Log::error($e->getMessage());
+            }
+            // --- End of image logic ---
 
             Item::create([
                 'name'        => $item['name'],
                 'description' => $item['description'],
                 'location'    => fake()->city(),
-                'image_path'  => 'https://picsum.photos/seed/'. fake()->numberBetween(100, 500) .'/300',
+                'image_path'  => $imagePath, // Use the local path here
                 'code'        => strtoupper(fake()->bothify('?##??#')),
                 'points'      => fake()->numberBetween(10, 100),
                 'status'      => fake()->randomElement(['lost', 'found']),
-                'is_visible'  => fake()->boolean(70),
+                'is_visible'  => fake()->boolean(80),
                 'reported_by' => $randomUser->id,
                 'created_at'  => fake()->dateTimeBetween('-3 days', 'now'),
             ]);
