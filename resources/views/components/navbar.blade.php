@@ -13,6 +13,11 @@
                 <a wire:navigate href="{{ route('feeds') }}" class="text-blue-600 hover:text-blue-600">Feeds</a>
                 <a wire:navigate href="{{ route('report') }}" class="text-blue-600 hover:text-blue-600">Report Item</a>
                 <a wire:navigate href="{{ route('profile') }}" class="text-blue-600 hover:text-blue-600">Profile</a>
+                <a wire:navigate href="{{ route('rewards') }}" class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold bg-blue-700 text-white hover:bg-blue-600 transition-colors">
+                    <i class="ph-bold ph-database"></i>
+                    {{-- Assumes a 'points' attribute on the User model --}}
+                    <span>{{ auth()->user()->points ?? 0 }} Points</span>
+                </a>
                 <a href="{{ route('logout') }}" class="text-blue-600 hover:text-blue-600">Sign Out</a>
             @else
                 <a wire:navigate href="{{ route('sign-in') }}" class="text-blue-600 hover:text-blue-600">Sign In</a>
@@ -21,22 +26,29 @@
         </nav>
 
         <!-- Mobile Menu Button -->
-        <button @click="open = !open" class="md:hidden" aria-label="Toggle Menu">
-            <i class="ph-bold ph-list text-2xl" x-show="!open"></i>
-            <i class="ph-bold ph-x text-2xl" x-show="open" style="display: none;"></i>
-        </button>
+        <div class="md:hidden gap-4 flex items-center">
+            <a wire:navigate href="{{ route('rewards') }}" class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold bg-blue-700 text-white hover:bg-blue-600 transition-colors">
+                    <i class="ph-bold ph-database"></i>
+                    {{-- Assumes a 'points' attribute on the User model --}}
+                    <span>{{ auth()->user()->points ?? 0 }} Points</span>
+                </a>
+            <button @click="open = !open" aria-label="Toggle Menu">
+                <i class="ph-bold ph-list text-2xl" x-show="!open"></i>
+                <i class="ph-bold ph-x text-2xl" x-show="open" style="display: none;"></i>
+            </button>
+        </div>
     </div>
 
     <!-- Mobile Menu (sliding out from top) -->
     <div x-show="open"
          x-transition:enter="transition ease-out duration-300"
-         x-transition:enter-start="-translate-y-full"
-         x-transition:enter-end="translate-y-0"
+         x-transition:enter-start="-translate-x-full"
+         x-transition:enter-end="translate-x-0"
          x-transition:leave="transition ease-in duration-300"
-         x-transition:leave-start="translate-y-0"
-         x-transition:leave-end="-translate-y-full"
+         x-transition:leave-start="translate-x-0"
+         x-transition:leave-end="-translate-x-full"
          style="display: none;"
-         class="md:hidden absolute top-16 left-0 w-full bg-white border-t border-zinc-200"
+         class="md:hidden absolute top-20 left-0 w-full bg-white/40 backdrop-blur-sm"
          @click.away="open = false">
         <div class="p-6 flex flex-col space-y-4">
             @auth

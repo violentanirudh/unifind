@@ -8,6 +8,7 @@
     <title>@yield('title', 'UniFind')</title>
 
     <!-- Styles -->
+    @PwaHead
     @livewireStyles
     @vite('resources/css/app.css')
 
@@ -51,6 +52,7 @@
 
 
     @livewireScripts
+    @RegisterServiceWorkerScript
 </body>
 
 </html>

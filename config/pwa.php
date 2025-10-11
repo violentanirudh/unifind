@@ -19,11 +19,11 @@ return [
     */
 
     'manifest' => [
-        'name' => 'Unifind PWA',
-        'short_name' => 'UFind',
+        'name' => 'Laravel PWA',
+        'short_name' => 'LPT',
         'background_color' => '#6777ef',
         'display' => 'fullscreen',
-        'description' => 'A Progressive Web Application setup for Unifind PWA.',
+        'description' => 'A Progressive Web Application setup for Laravel projects.',
         'theme_color' => '#6777ef',
         'icons' => [
             [
@@ -51,5 +51,5 @@ return [
     | Livewire-specific PWA optimizations or features.
     */
 
-    'livewire-app' => true,
+    'livewire-app' => false,
 ];

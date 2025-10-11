@@ -15,6 +15,7 @@ Route::middleware(['auth', 'role:user,moderator,admin'])->group(function () {
     Route::get('/report', \App\Livewire\Report::class)->name('report');
     Route::get('/profile', \App\Livewire\Profile::class)->name('profile');
     Route::get('/items/{item}', \App\Livewire\Item::class)->name('item');
+    Route::get('/rewards', \App\Livewire\Rewards::class)->name('rewards');
 
     Route::get('/logout', function () {
         auth()->logout();
