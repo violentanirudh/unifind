@@ -1,6 +1,6 @@
-<div class="w-full mx-auto">
+<div class="max-w-96 mx-auto my-10">
 
-    <h1 class="text-xl font-semibold">Sign In</h1>
+    <h1 class="text-3xl font-bold">Sign In</h1>
     <p class="text-sm text-zinc-500">Please enter your credentials to sign in.</p>
 
     <form wire:submit.prevent="submit" class="space-y-4 mt-6">

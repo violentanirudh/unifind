@@ -41,13 +41,15 @@ class Feeds extends Component
     public function render()
     {
         return view('livewire.feeds', [
-            'items' => Item::where('is_visible', false)
+            'items' => Item::where('is_visible', true)
+                    ->where('reported_by', '!=', $this->user->id)
+                    ->whereIn('status', ['lost', 'found'])
                     ->when($this->search, function($query) {
                         $query->where('name', 'like', '%' . $this->search . '%');
                         $query->orWhere('code', 'like', '%' . strtoupper($this->search) . '%');
                     })
                     ->orderBy('created_at', 'desc')
-                    ->simplePaginate(10)
+                    ->simplePaginate(12)
         ])
         ->extends('layouts.app')
         ->section('content');

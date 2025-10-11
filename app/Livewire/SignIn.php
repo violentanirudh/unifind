@@ -6,7 +6,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Rule;
 
-class Signin extends Component
+class SignIn extends Component
 {
     #[Rule('required|email')]
     public $email;

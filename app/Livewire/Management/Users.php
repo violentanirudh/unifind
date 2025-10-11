@@ -27,7 +27,7 @@ class Users extends Component
                         $query->orWhere('email', 'like', '%', $this->search . '%');
                     })
                     ->orderBy('created_at', 'desc')
-                    ->paginate(20)
+                    ->paginate(10)
         ])
             ->extends('layouts.management')
             ->section('content');

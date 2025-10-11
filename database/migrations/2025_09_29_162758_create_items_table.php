@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('code');
             $table->string('image_path')->nullable();
             $table->string('location');
+            $table->integer('points')->default('0');
             $table->text('description')->nullable();
             $table->enum('status', ['lost', 'found', 'deposited', 'claimed'])->default('lost');
             $table->boolean('is_visible')->default(false);

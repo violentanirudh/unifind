@@ -1,15 +1,18 @@
 <div class="w-full" x-data="{
     mode: 'search'
 }">
-
+{{--
     <div class="mb-4">
         <a wire:navigate href="{{ route('feeds') }}" class="text-blue-500 flex items-center gap-2">
             <i class="ph-bold ph-arrow-left"></i> Back
         </a>
     </div>
+--}}
 
-    <h1 class="text-xl font-medium">Report Missing Item</h1>
+    <div class="text-center mt-6">
+    <h1 class="text-2xl font-semibold">Report Missing Item</h1>
     <p class="text-sm text-zinc-500">Report your missing item with a breif description.</p>
+    </div>
 
     <form wire:submit.prevent="submit" class="space-y-4 mt-6">
 

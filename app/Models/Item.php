@@ -17,6 +17,7 @@ class Item extends Model
         'status',
         'image_path',
         'deposited_at',
+        'points',
         'claimed_at',
         'is_visible',
         'reported_by',

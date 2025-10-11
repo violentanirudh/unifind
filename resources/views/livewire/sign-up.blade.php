@@ -1,6 +1,6 @@
-<div class="w-full">
+<div class="max-w-96 mx-auto my-10">
 
-    <h1 class="text-xl font-semibold">Sign Up</h1>
+    <h1 class="text-3xl font-bold">Sign Up</h1>
     <p class="text-sm text-zinc-500">Create an account to get started.</p>
 
     <form wire:submit.prevent="submit" class="space-y-4 mt-6">

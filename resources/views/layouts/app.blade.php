@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>@yield('title', 'UniFind')</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- Styles -->
-        @livewireStyles
-        @vite('resources/css/app.css')
+    <title>@yield('title', 'UniFind')</title>
 
-        <!-- Icons -->
-        <link
-            rel="stylesheet"
-            type="text/css"
-            href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css"
-        />
+    <!-- Styles -->
+    @livewireStyles
+    @vite('resources/css/app.css')
 
-        <!-- Styles -->
-        <style>
-            ::-webkit-scrollbar {
-                display: none;
-            }
-        </style>
+    <!-- Icons -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css" />
+
+    <!-- Styles -->
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
 
 
-    </head>
-    <body class="bg-zinc-200 min-h-screen flex flex-col items-center justify-between overflow-hidden">
+</head>
 
-        <div class="bg-white w-full sm:w-sm mx-auto min-h-screen max-h-screen overflow-y-scroll">
+<body class="relative bg-gradient-to-br from-white to-blue-100 flex flex-col items-center justify-between min-h-screen">
+
+        <div class="w-full max-w-screen-xl mx-auto z-10 py-4 ">
+
             <x-navbar />
 
             <div class="p-6">
@@ -36,11 +36,21 @@
                 @yield('content')
             </div>
 
-            <div class="p-10 text-center text-sm text-gray-500">
-                &copy; {{ date('Y') }} UniFind. All rights reserved.
+            <div class="p-10 text-center text-gray-500">
+                <div class="flex gap-6 justify-center mb-4">
+                    <a href="" class="text-blue-500 hover:underline">Privacy</a>
+                    <a href="" class="text-blue-500 hover:underline">Terms</a>
+                    <a href="" class="text-blue-500 hover:underline">Cookies</a>
+                </div>
+                <span class="text-sm">
+                    &copy; {{ date('Y') }} UniFind. All rights reserved.
+                </span>
             </div>
-        </div>
 
-        @livewireScripts
-    </body>
+    </div>
+
+
+    @livewireScripts
+</body>
+
 </html>

@@ -1,12 +1,12 @@
 <div>
-
+{{--
     <div class="mb-4">
         <a wire:navigate
         href="{{ url()->previous() !== url()->current() ? url()->previous() : route('feeds') }}"
         class="text-blue-500 flex items-center gap-2">
             <i class="ph-bold ph-arrow-left"></i> Back
         </a>
-    </div>
+    </div> --}}
 
     <div class="w-full aspect-square mb-4 bg-zinc-100 rounded-lg overflow-hidden">
         @if ($item->image_path)

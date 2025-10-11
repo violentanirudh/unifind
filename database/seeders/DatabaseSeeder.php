@@ -15,17 +15,17 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Create some users
-        User::factory(3)->create();
+        User::factory(5)->create();
 
-        $creators = ['Anirudh', 'Dev', 'Maitri', 'Avani'];
+        // $creators = ['Anirudh', 'Dev', 'Maitri', 'Avani'];
 
-        foreach ($creators as $name) {
-            User::create([
-                'name' => $name,
-                'email' => strtolower($name) . '@unifind.com',
-                'password' => Hash::make('password'),
-            ]);
-        }
+        // foreach ($creators as $name) {
+        //     User::create([
+        //         'name' => $name,
+        //         'email' => strtolower($name) . '@unifind.com',
+        //         'password' => Hash::make('password'),
+        //     ]);
+        // }
 
         $users = User::all();
 
@@ -36,7 +36,6 @@ class DatabaseSeeder extends Seeder
         //         'reported_by' => $randomUser->id,
         //     ]);
         // }
-
 
         $items = [
             ['name' => 'Black Wallet', 'description' => 'Leather wallet with multiple card slots, possibly containing student ID.'],
@@ -97,7 +96,9 @@ class DatabaseSeeder extends Seeder
                 'name'        => $item['name'],
                 'description' => $item['description'],
                 'location'    => fake()->city(),
+                'image_path'  => 'https://picsum.photos/seed/'. fake()->numberBetween(100, 500) .'/300',
                 'code'        => strtoupper(fake()->bothify('?##??#')),
+                'points'      => fake()->numberBetween(10, 100),
                 'status'      => fake()->randomElement(['lost', 'found']),
                 'is_visible'  => fake()->boolean(70),
                 'reported_by' => $randomUser->id,
